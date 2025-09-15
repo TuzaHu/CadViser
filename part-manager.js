@@ -158,8 +158,8 @@ class PartManager {
         button.style.pointerEvents = 'none';
         button.style.color = '#888888';
         button.style.userSelect = 'none';
-        button.textContent = 'No Video Available';
-        button.title = 'No video available for this part';
+        button.textContent = 'Ingen video tilgjengelig';
+        button.title = 'Ingen video tilgjengelig for denne delen';
         
         // Remove any existing event listeners by cloning the element
         const newButton = button.cloneNode(true);
@@ -569,8 +569,8 @@ class PartManager {
                 playButton.style.backgroundColor = '#ff0000';
                 playButton.style.pointerEvents = 'auto';
                 playButton.style.color = 'white';
-                playButton.textContent = 'Play Video';
-                playButton.title = 'Click to play video';
+                playButton.textContent = 'Spill av video';
+                playButton.title = 'Klikk for å spille av video';
                 console.log(`🎬 ✅ ENABLING video controls for part: ${part.name}`);
             } else {
                 // Completely disable play button - make it non-interactive
@@ -1528,3 +1528,4 @@ class PartManager {
         this.camera = camera;
     }
 }
+ 
