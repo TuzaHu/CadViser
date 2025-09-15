@@ -670,25 +670,32 @@ let touchCount = 0;
 // Add touch event listeners for mobile gestures
 function addMobileTouchHandlers() {
     const canvas = renderer.domElement;
+    let doubleTapTimer = null;
     
-    // Prevent default touch behaviors
+    // Only prevent default for specific gestures, let OrbitControls handle normal touch
     canvas.addEventListener('touchstart', (e) => {
-        e.preventDefault();
         touchCount = e.touches.length;
-        lastTouchTime = Date.now();
         
-        // Double tap to reset view
+        // Double tap to reset view (only for single touch)
         if (e.touches.length === 1) {
             const currentTime = Date.now();
             if (currentTime - lastTouchTime < 300) {
+                // Clear any existing timer
+                if (doubleTapTimer) {
+                    clearTimeout(doubleTapTimer);
+                }
+                
+                // Double tap detected
                 if (modelGroup) {
                     fitCameraToObject(modelGroup);
                 }
+                lastTouchTime = 0; // Reset to prevent triple tap
+            } else {
+                lastTouchTime = currentTime;
             }
-            lastTouchTime = currentTime;
         }
         
-        // Pinch to zoom gesture
+        // Pinch to zoom gesture - let OrbitControls handle this
         if (e.touches.length === 2) {
             const touch1 = e.touches[0];
             const touch2 = e.touches[1];
@@ -698,13 +705,12 @@ function addMobileTouchHandlers() {
             );
             touchStartZoom = controls.object.position.length();
         }
-    }, { passive: false });
+    });
     
+    // Let OrbitControls handle touchmove - don't interfere
     canvas.addEventListener('touchmove', (e) => {
-        e.preventDefault();
-        
-        // Handle pinch zoom
-        if (e.touches.length === 2) {
+        // Only handle custom pinch zoom if we started it
+        if (e.touches.length === 2 && touchStartDistance > 0) {
             const touch1 = e.touches[0];
             const touch2 = e.touches[1];
             const currentDistance = Math.sqrt(
@@ -712,20 +718,22 @@ function addMobileTouchHandlers() {
                 Math.pow(touch2.clientY - touch1.clientY, 2)
             );
             
-            if (touchStartDistance > 0) {
-                const zoomFactor = currentDistance / touchStartDistance;
-                const newZoom = touchStartZoom * zoomFactor;
-                const direction = controls.object.position.clone().normalize();
-                controls.object.position.copy(direction.multiplyScalar(newZoom));
-                controls.update();
-            }
+            const zoomFactor = currentDistance / touchStartDistance;
+            const newZoom = touchStartZoom * zoomFactor;
+            const direction = controls.object.position.clone().normalize();
+            controls.object.position.copy(direction.multiplyScalar(newZoom));
+            controls.update();
         }
-    }, { passive: false });
+    });
     
     canvas.addEventListener('touchend', (e) => {
-        e.preventDefault();
         touchCount = e.touches.length;
-    }, { passive: false });
+        // Reset pinch zoom tracking
+        if (e.touches.length < 2) {
+            touchStartDistance = 0;
+            touchStartZoom = 0;
+        }
+    });
 }
 
 // Mobile-specific UI adjustments
@@ -803,7 +811,7 @@ function hapticFeedback() {
     }
 }
 
-// Enhanced mobile click handling
+// Enhanced mobile click handling - simplified to avoid conflicts
 function addMobileClickHandlers() {
     const canvas = renderer.domElement;
     let touchStartTime = 0;
@@ -828,8 +836,9 @@ function addMobileClickHandlers() {
                 Math.pow(touchEndY - touchStartY, 2)
             );
             
-            // Only trigger click if it's a short tap with minimal movement
-            if (touchDuration < 300 && touchDistance < 10) {
+            // Only trigger click if it's a very short tap with minimal movement
+            // This prevents interference with camera controls
+            if (touchDuration < 150 && touchDistance < 5) {
                 // Convert touch coordinates to mouse coordinates
                 const rect = canvas.getBoundingClientRect();
                 const mouseEvent = new MouseEvent('click', {
