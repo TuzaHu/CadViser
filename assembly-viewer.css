@@ -173,12 +173,14 @@ body {
     right: 20px;
     background: rgba(0, 0, 0, 0.9);
     color: white;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 12px;
+    border-radius: 8px;
     z-index: 100;
     display: none;
     box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
     border: 1px solid #00ff00;
+    max-width: 280px;
+    font-size: 14px;
 }
 
 #partInfoOverlay.visible {
@@ -433,14 +435,22 @@ body {
 
 #stats {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
     background: rgba(0, 0, 0, 0.8);
     color: white;
-    padding: 15px;
-    border-radius: 8px;
+    padding: 8px 12px;
+    border-radius: 6px;
     z-index: 100;
     box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    font-size: 12px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 #stats div {
@@ -509,9 +519,11 @@ body {
         top: 10px;
         right: 10px;
         left: 10px;
-        padding: 15px;
-        max-height: 60vh;
+        padding: 10px;
+        max-height: 50vh;
         overflow-y: auto;
+        max-width: none;
+        font-size: 13px;
     }
     
     /* Mobile parts list */
@@ -525,11 +537,14 @@ body {
     
     /* Mobile stats */
     #stats {
-        bottom: 10px;
-        right: 10px;
-        left: 10px;
-        padding: 10px;
+        bottom: 5px;
+        right: 5px;
+        left: 5px;
+        padding: 6px 8px;
         text-align: center;
+        font-size: 11px;
+        flex-direction: column;
+        gap: 2px;
     }
     
     /* Mobile settings gear */

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Interactive Assembly Viewer</title>
+    <title>Interaktiv Montasjevisning</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
     <link rel="stylesheet" href="assembly-viewer.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -12,53 +12,53 @@
 </head>
 <body>
     <div id="canvas-container"></div>
-    <div id="status">Loading...</div>
+    <div id="status">Laster...</div>
     <div id="settingsOverlay">
-        <div id="settingsTitle">Settings</div>
+        <div id="settingsTitle">Innstillinger</div>
         <div class="settings-section">
-            <label for="upAxis">Up Axis:</label>
+            <label for="upAxis">Opp-akse:</label>
             <select id="upAxis">
-                <option value="X">X Axis</option>
-                <option value="-X">-X Axis</option>
-                <option value="Y" selected>Y Axis</option>
-                <option value="-Y">-Y Axis</option>
-                <option value="Z">Z Axis</option>
-                <option value="-Z">-Z Axis</option>
+                <option value="X">X-akse</option>
+                <option value="-X">-X-akse</option>
+                <option value="Y" selected>Y-akse</option>
+                <option value="-Y">-Y-akse</option>
+                <option value="Z">Z-akse</option>
+                <option value="-Z">-Z-akse</option>
             </select>
         </div>
         <div class="settings-section">
-            <label for="materialColor">Material Color:</label>
+            <label for="materialColor">Materialfarge:</label>
             <input type="color" id="materialColor" value="#1a1a1a">
         </div>
         <div class="settings-section">
-            <label for="glossiness">Glossiness (Roughness):</label>
+            <label for="glossiness">Ruhet:</label>
             <input type="range" id="glossiness" min="0" max="1" step="0.01" value="0.2">
         </div>
         <div class="settings-section">
-            <label for="lightIntensity">Scene Realism (Light Intensity):</label>
+            <label for="lightIntensity">Lysstyrke:</label>
             <input type="range" id="lightIntensity" min="0.5" max="2" step="0.1" value="1.0">
         </div>
         <div class="settings-section">
-            <label for="shadowQuality">Shadow Quality:</label>
+            <label for="shadowQuality">Skyggekvalitet:</label>
             <select id="shadowQuality">
-                <option value="1024">Low</option>
-                <option value="2048" selected>Medium</option>
-                <option value="4096">High</option>
+                <option value="1024">Lav</option>
+                <option value="2048" selected>Middels</option>
+                <option value="4096">Høy</option>
             </select>
         </div>
         <div class="settings-section">
-            <label for="orthographicToggle">Orthographic Camera:</label>
+            <label for="orthographicToggle">Ortografisk kamera:</label>
             <input type="checkbox" id="orthographicToggle">
         </div>
         <div class="settings-section">
-            <label for="applyScope">Apply Changes To:</label>
+            <label for="applyScope">Bruk endringer på:</label>
             <select id="applyScope">
-                <option value="global">Global</option>
-                <option value="current">Current Model</option>
+                <option value="global">Globalt</option>
+                <option value="current">Nåværende modell</option>
             </select>
         </div>
         <div class="settings-section">
-            <button id="resetSettings">Reset to Defaults</button>
+            <button id="resetSettings">Tilbakestill til standard</button>
         </div>
     </div>
     <div id="partInfoOverlay">
@@ -67,46 +67,46 @@
         <div id="partDescription"></div>
         <div class="button-container">
             <div class="button-row">
-                <button id="isolatePart">Isolate Part</button>
-                <button id="showAllPartsBtn" style="display: none;">Show All Parts</button>
-                <button id="toggleGhostMode">Toggle Ghost Mode</button>
+                <button id="isolatePart">Isoler del</button>
+                <button id="showAllPartsBtn" style="display: none;">Vis alle deler</button>
+                <button id="toggleGhostMode">Spøkelsesmodus</button>
             </div>
             
             <!-- Sectioning Controls -->
             <div class="sectioning-section">
-                <h4>Sectioning Tools</h4>
+                <h4>Seksjonsverktøy</h4>
                 <div class="section-group">
-                    <label for="sectionPlaneType">Section Plane:</label>
+                    <label for="sectionPlaneType">Seksjonsplan:</label>
                     <select id="sectionPlaneType">
-                        <option value="XY">XY Plane (Horizontal)</option>
-                        <option value="XZ">XZ Plane (Frontal)</option>
-                        <option value="YZ">YZ Plane (Side)</option>
+                        <option value="XY">XY-plan (Horisontalt)</option>
+                        <option value="XZ">XZ-plan (Frontalt)</option>
+                        <option value="YZ">YZ-plan (Side)</option>
                     </select>
                 </div>
                 <div class="section-group">
-                    <label for="sectionPosition">Position:</label>
+                    <label for="sectionPosition">Posisjon:</label>
                     <input type="range" id="sectionPosition" min="-1" max="1" step="0.01" value="0">
                     <span id="sectionPositionValue">0.00</span>
                 </div>
                 <div class="section-buttons">
-                    <button id="createSection" class="section-btn">Create Section</button>
-                    <button id="removeSection" class="section-btn">Remove Section</button>
-                    <button id="resetSection" class="section-btn">Reset View</button>
+                    <button id="createSection" class="section-btn">Lag seksjon</button>
+                    <button id="removeSection" class="section-btn">Fjern seksjon</button>
+                    <button id="resetSection" class="section-btn">Tilbakestill visning</button>
                 </div>
                 <div class="section-toggle">
-                    <label for="showCuttingPlane">Show Cutting Plane:</label>
+                    <label for="showCuttingPlane">Vis skjæreplan:</label>
                     <input type="checkbox" id="showCuttingPlane" checked>
                 </div>
                 <div class="video-controls" id="videoControls" style="display: none;">
-                    <button id="playVideo" class="section-btn" disabled>No Video Available</button>
-                    <button id="stopVideo" class="section-btn" style="display: none;">Stop Video</button>
+                    <button id="playVideo" class="section-btn" disabled>Ingen video tilgjengelig</button>
+                    <button id="stopVideo" class="section-btn" style="display: none;">Stopp video</button>
                 </div>
             </div>
             <div class="view-button-grid">
-                <button id="frontView" title="Front View">↗</button>
-                <button id="topView" title="Top View">↑</button>
-                <button id="backView" title="Back View">↙</button>
-                <button id="isometricView" title="Isometric View">⟐</button>
+                <button id="frontView" title="Foranvisning">↗</button>
+                <button id="topView" title="Toppvisning">↑</button>
+                <button id="backView" title="Bakvisning">↙</button>
+                <button id="isometricView" title="Isometrisk visning">⟐</button>
             </div>
         </div>
     </div>
@@ -114,9 +114,9 @@
     
     
     <div id="stats">
-        <div>Total Parts: <span id="totalParts">0</span></div>
-        <div>Selected Part: <span id="selectedPart">None</span></div>
-        <div>Visible Parts: <span id="visibleParts">0</span></div>
+        <div>Totalt: <span id="totalParts">0</span></div>
+        <div>Valgt: <span id="selectedPart">Ingen</span></div>
+        <div>Synlig: <span id="visibleParts">0</span></div>
     </div>
     
     <!-- Video Overlay -->
@@ -130,8 +130,8 @@
         </div>
     </div>
     <button id="settingsGear" class="gear-button">&#9881;</button>
-    <script src="part-analyzer.js?v=38"></script>
-    <script src="part-manager.js?v=38"></script>
-    <script src="assembly-viewer.js?v=38"></script>
+    <script src="part-analyzer.js?v=39"></script>
+    <script src="part-manager.js?v=39"></script>
+    <script src="assembly-viewer.js?v=39"></script>
 </body>
 </html>

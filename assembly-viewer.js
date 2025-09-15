@@ -138,7 +138,7 @@ let modelGroup = null;
 function toggleGhostMode() {
     isGhostMode = !isGhostMode;
     const button = document.getElementById('toggleGhostMode');
-    button.textContent = isGhostMode ? 'Disable Ghost Mode' : 'Enable Ghost Mode';
+    button.textContent = isGhostMode ? 'Deaktiver spøkelsesmodus' : 'Aktiver spøkelsesmodus';
 
     const selectedPart = partManager.getSelectedPart();
     partManager.getAllParts().forEach(part => {
@@ -388,7 +388,7 @@ function resetSettings() {
 
 // Load OBJ model
 console.log("Attempting to load PipeAssembly.obj...");
-document.getElementById('status').textContent = "Loading model...";
+document.getElementById('status').textContent = "Laster modell...";
 
 fetch('PipeAssembly.obj')
     .then(response => {
@@ -408,7 +408,7 @@ fetch('PipeAssembly.obj')
             'PipeAssembly.obj',
             (object) => {
                 console.log("✅ Model loaded successfully!", object);
-                document.getElementById('status').textContent = "Model loaded! Click parts to interact.";
+                document.getElementById('status').textContent = "Modell lastet! Klikk på deler for å interagere.";
                 
                 object.traverse(child => {
                     if (child.isMesh) {
@@ -459,19 +459,19 @@ fetch('PipeAssembly.obj')
             },
             (xhr) => {
                 const percent = Math.round((xhr.loaded / xhr.total) * 100);
-                document.getElementById('status').textContent = `Loading model... ${percent}%`;
+                document.getElementById('status').textContent = `Laster modell... ${percent}%`;
                 console.log(`Loading progress: ${percent}%`);
             },
             (error) => {
                 console.error("❌ Error loading model:", error);
-                document.getElementById('status').textContent = `Error: ${error.message}`;
+                document.getElementById('status').textContent = `Feil: ${error.message}`;
                 document.getElementById('status').style.color = "red";
             }
         );
     })
     .catch(error => {
         console.error("❌ Error fetching OBJ file:", error);
-        document.getElementById('status').textContent = `Error: Failed to fetch model - ${error.message}`;
+        document.getElementById('status').textContent = `Feil: Kunne ikke hente modell - ${error.message}`;
         document.getElementById('status').style.color = "red";
     });
 
