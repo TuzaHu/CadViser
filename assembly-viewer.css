@@ -84,28 +84,30 @@ body {
     position: absolute;
     top: 20px;
     left: 20px;
-    background: rgba(0, 0, 0, 0.8);
+    background: none;
     color: white;
-    padding: 15px 25px;
-    border-radius: 8px;
+    padding: 0;
+    border-radius: 0;
     z-index: 100;
     font-size: 16px;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    box-shadow: none;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 #settingsOverlay {
     position: absolute;
     top: 80px;
     left: 20px;
-    background: rgba(0, 0, 0, 0.8);
+    background: none;
     color: white;
-    padding: 12px;
-    border-radius: 6px;
+    padding: 0;
+    border-radius: 0;
     z-index: 100;
     display: none;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    box-shadow: none;
     width: 200px;
     font-size: 13px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 #settingsOverlay.visible {
@@ -262,12 +264,13 @@ body {
     left: 20px;
     max-height: 200px;
     overflow-y: auto;
-    background: rgba(0, 0, 0, 0.8);
+    background: none;
     color: white;
-    padding: 15px;
-    border-radius: 8px;
+    padding: 0;
+    border-radius: 0;
     z-index: 100;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    box-shadow: none;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .part-item {
@@ -440,12 +443,12 @@ body {
     bottom: 10px;
     left: 10px;
     right: 10px;
-    background: rgba(0, 0, 0, 0.8);
+    background: none;
     color: white;
-    padding: 8px 12px;
-    border-radius: 6px;
+    padding: 0;
+    border-radius: 0;
     z-index: 100;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    box-shadow: none;
     font-size: 12px;
     text-align: center;
     display: flex;
@@ -453,6 +456,7 @@ body {
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 #stats div {
@@ -502,9 +506,11 @@ body {
         top: 10px;
         left: 10px;
         right: 10px;
-        padding: 10px 15px;
+        padding: 0;
         font-size: 14px;
         text-align: center;
+        background: none;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
     }
     
     /* Mobile settings overlay */
@@ -513,8 +519,10 @@ body {
         left: 10px;
         right: 10px;
         width: auto;
-        padding: 10px;
+        padding: 0;
         font-size: 12px;
+        background: none;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
     }
     
     /* Mobile part info overlay */
@@ -537,7 +545,9 @@ body {
         left: 10px;
         right: 10px;
         max-height: 150px;
-        padding: 10px;
+        padding: 0;
+        background: none;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
     }
     
     /* Mobile stats */
@@ -545,11 +555,13 @@ body {
         bottom: 5px;
         right: 5px;
         left: 5px;
-        padding: 6px 8px;
+        padding: 0;
         text-align: center;
         font-size: 11px;
         flex-direction: column;
         gap: 2px;
+        background: none;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
     }
     
     /* Mobile settings gear */
@@ -655,8 +667,10 @@ body {
     #status {
         top: 15px;
         left: 15px;
-        padding: 12px 20px;
+        padding: 0;
         font-size: 15px;
+        background: none;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
     
     /* Tablet settings overlay */
@@ -664,15 +678,19 @@ body {
         top: 70px;
         left: 15px;
         width: 280px;
-        padding: 18px;
+        padding: 0;
+        background: none;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
     
     /* Tablet part info overlay */
     #partInfoOverlay {
         top: 15px;
         right: 15px;
-        padding: 18px;
+        padding: 0;
         max-width: 300px;
+        background: none;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
     
     /* Tablet parts list */
@@ -680,14 +698,18 @@ body {
         bottom: 15px;
         left: 15px;
         max-height: 180px;
-        padding: 12px;
+        padding: 0;
+        background: none;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
     
     /* Tablet stats */
     #stats {
         bottom: 15px;
         right: 15px;
-        padding: 12px;
+        padding: 0;
+        background: none;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
     
     /* Tablet settings gear */
