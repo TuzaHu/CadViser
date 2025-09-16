@@ -15,11 +15,11 @@ class ScreenScaler {
         this.scaleY = this.screenHeight / this.baseHeight;
         this.scaleDiagonal = this.screenDiagonal / this.baseDiagonal;
         
-        // Use the smallest scale to maintain proportions
+        // Use the smallest scale to maintain proportions, but be more conservative
         this.scale = Math.min(this.scaleX, this.scaleY, this.scaleDiagonal);
         
-        // Clamp scale between 0.5 and 2.0 for usability
-        this.scale = Math.max(0.5, Math.min(2.0, this.scale));
+        // Clamp scale between 0.7 and 1.5 for better model visibility
+        this.scale = Math.max(0.7, Math.min(1.5, this.scale));
         
         console.log(`📱 Screen: ${this.screenWidth}x${this.screenHeight}, Scale: ${this.scale.toFixed(2)}`);
         
@@ -37,14 +37,14 @@ class ScreenScaler {
         root.style.setProperty('--screen-width', `${this.screenWidth}px`);
         root.style.setProperty('--screen-height', `${this.screenHeight}px`);
         
-        // Update viewport meta tag for better mobile scaling
+        // Keep viewport at 1.0 scale to prevent model scaling
         let viewport = document.querySelector('meta[name="viewport"]');
         if (!viewport) {
             viewport = document.createElement('meta');
             viewport.name = 'viewport';
             document.head.appendChild(viewport);
         }
-        viewport.content = `width=device-width, initial-scale=${this.scale}, maximum-scale=${this.scale * 1.5}, user-scalable=yes`;
+        viewport.content = `width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no`;
     }
     
     handleResize() {
@@ -58,20 +58,25 @@ class ScreenScaler {
             this.scaleDiagonal = this.screenDiagonal / this.baseDiagonal;
             
             this.scale = Math.min(this.scaleX, this.scaleY, this.scaleDiagonal);
-            this.scale = Math.max(0.5, Math.min(2.0, this.scale));
+            this.scale = Math.max(0.7, Math.min(1.5, this.scale));
             
             console.log(`📱 Resized: ${this.screenWidth}x${this.screenHeight}, Scale: ${this.scale.toFixed(2)}`);
             this.applyScaling();
             
-            // Update camera aspect ratio
+            // Update camera aspect ratio (but don't scale the model)
             if (perspectiveCamera) {
                 perspectiveCamera.aspect = this.screenWidth / this.screenHeight;
                 perspectiveCamera.updateProjectionMatrix();
             }
             
-            // Update renderer size
+            // Update renderer size (but don't scale the model)
             if (renderer) {
                 renderer.setSize(this.screenWidth, this.screenHeight);
+            }
+            
+            // Ensure model maintains its original size
+            if (typeof modelGroup !== 'undefined' && modelGroup) {
+                fitCameraToObject(modelGroup);
             }
         }, 100);
     }
