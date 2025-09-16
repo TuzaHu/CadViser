@@ -294,7 +294,7 @@ body {
 .sectioning-section {
     margin-top: 15px;
     padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: none;
 }
 
 .sectioning-section h4 {
@@ -324,13 +324,13 @@ body {
     padding: 6px;
     border: 1px solid #ff0000;
     border-radius: 4px;
-    background: rgba(255, 255, 255, 0.1);
+    background: none;
     color: white;
     font-size: 12px;
 }
 
 .section-group select option {
-    background: #000000;
+    background: none;
     color: white;
 }
 
@@ -338,7 +338,7 @@ body {
     -webkit-appearance: none;
     appearance: none;
     height: 4px;
-    background: rgba(255, 255, 255, 0.2);
+    background: none;
     outline: none;
     border-radius: 2px;
 }
@@ -833,7 +833,7 @@ body {
     }
     
     #status, #settingsOverlay, #partInfoOverlay, #partsList, #stats {
-        background: rgba(0, 0, 0, 0.9);
-        border: 1px solid #333;
+        background: none;
+        border: none;
     }
 }
