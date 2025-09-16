@@ -1,5 +1,93 @@
 console.log("Starting Assembly Viewer...");
 
+// Screen Detection and Scaling System
+class ScreenScaler {
+    constructor() {
+        this.screenWidth = window.innerWidth;
+        this.screenHeight = window.innerHeight;
+        this.screenDiagonal = Math.sqrt(this.screenWidth * this.screenWidth + this.screenHeight * this.screenHeight);
+        this.baseWidth = 1920; // Base desktop width
+        this.baseHeight = 1080; // Base desktop height
+        this.baseDiagonal = Math.sqrt(this.baseWidth * this.baseWidth + this.baseHeight * this.baseHeight);
+        
+        // Calculate scale factors
+        this.scaleX = this.screenWidth / this.baseWidth;
+        this.scaleY = this.screenHeight / this.baseHeight;
+        this.scaleDiagonal = this.screenDiagonal / this.baseDiagonal;
+        
+        // Use the smallest scale to maintain proportions
+        this.scale = Math.min(this.scaleX, this.scaleY, this.scaleDiagonal);
+        
+        // Clamp scale between 0.5 and 2.0 for usability
+        this.scale = Math.max(0.5, Math.min(2.0, this.scale));
+        
+        console.log(`📱 Screen: ${this.screenWidth}x${this.screenHeight}, Scale: ${this.scale.toFixed(2)}`);
+        
+        // Apply scaling to CSS custom properties
+        this.applyScaling();
+        
+        // Listen for resize events
+        window.addEventListener('resize', () => this.handleResize());
+        window.addEventListener('orientationchange', () => this.handleResize());
+    }
+    
+    applyScaling() {
+        const root = document.documentElement;
+        root.style.setProperty('--scale-factor', this.scale);
+        root.style.setProperty('--screen-width', `${this.screenWidth}px`);
+        root.style.setProperty('--screen-height', `${this.screenHeight}px`);
+        
+        // Update viewport meta tag for better mobile scaling
+        let viewport = document.querySelector('meta[name="viewport"]');
+        if (!viewport) {
+            viewport = document.createElement('meta');
+            viewport.name = 'viewport';
+            document.head.appendChild(viewport);
+        }
+        viewport.content = `width=device-width, initial-scale=${this.scale}, maximum-scale=${this.scale * 1.5}, user-scalable=yes`;
+    }
+    
+    handleResize() {
+        setTimeout(() => {
+            this.screenWidth = window.innerWidth;
+            this.screenHeight = window.innerHeight;
+            this.screenDiagonal = Math.sqrt(this.screenWidth * this.screenWidth + this.screenHeight * this.screenHeight);
+            
+            this.scaleX = this.screenWidth / this.baseWidth;
+            this.scaleY = this.screenHeight / this.baseHeight;
+            this.scaleDiagonal = this.screenDiagonal / this.baseDiagonal;
+            
+            this.scale = Math.min(this.scaleX, this.scaleY, this.scaleDiagonal);
+            this.scale = Math.max(0.5, Math.min(2.0, this.scale));
+            
+            console.log(`📱 Resized: ${this.screenWidth}x${this.screenHeight}, Scale: ${this.scale.toFixed(2)}`);
+            this.applyScaling();
+            
+            // Update camera aspect ratio
+            if (perspectiveCamera) {
+                perspectiveCamera.aspect = this.screenWidth / this.screenHeight;
+                perspectiveCamera.updateProjectionMatrix();
+            }
+            
+            // Update renderer size
+            if (renderer) {
+                renderer.setSize(this.screenWidth, this.screenHeight);
+            }
+        }, 100);
+    }
+    
+    getScaledSize(baseSize) {
+        return Math.round(baseSize * this.scale);
+    }
+    
+    getScaledFontSize(baseFontSize) {
+        return Math.max(10, Math.round(baseFontSize * this.scale));
+    }
+}
+
+// Initialize screen scaler
+const screenScaler = new ScreenScaler();
+
 // Create scene
 const scene = new THREE.Scene();
 const sceneGroup = new THREE.Group(); // Only for model

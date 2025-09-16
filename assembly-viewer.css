@@ -1,8 +1,20 @@
+/* Global Styles */
+:root {
+    --scale-factor: 1;
+    --screen-width: 1920px;
+    --screen-height: 1080px;
+    --base-font-size: 14px;
+    --base-button-size: 40px;
+    --base-padding: 10px;
+    --base-margin: 10px;
+}
+
 body { 
     margin: 0; 
     overflow: hidden; 
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom, #2c3e50, #1a252f);
+    font-size: calc(var(--base-font-size) * var(--scale-factor));
 }
 
 /* Video Overlay Styles */
@@ -48,10 +60,10 @@ body {
     color: white;
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: calc(40px * var(--scale-factor));
+    height: calc(40px * var(--scale-factor));
     cursor: pointer;
-    font-size: 16px;
+    font-size: calc(16px * var(--scale-factor));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -82,22 +94,22 @@ body {
 
 #status {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: calc(var(--base-margin) * var(--scale-factor));
+    left: calc(var(--base-margin) * var(--scale-factor));
     background: none;
     color: white;
     padding: 0;
     border-radius: 0;
     z-index: 100;
-    font-size: 16px;
+    font-size: calc(16px * var(--scale-factor));
     box-shadow: none;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 #settingsOverlay {
     position: absolute;
-    top: 80px;
-    left: 20px;
+    top: calc(80px * var(--scale-factor));
+    left: calc(var(--base-margin) * var(--scale-factor));
     background: none;
     color: white;
     padding: 0;
@@ -105,8 +117,8 @@ body {
     z-index: 100;
     display: none;
     box-shadow: none;
-    width: 200px;
-    font-size: 13px;
+    width: calc(200px * var(--scale-factor));
+    font-size: calc(13px * var(--scale-factor));
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
@@ -172,8 +184,8 @@ body {
 
 #partInfoOverlay {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: calc(var(--base-margin) * var(--scale-factor));
+    right: calc(var(--base-margin) * var(--scale-factor));
     background: none;
     color: white;
     padding: 0;
@@ -182,8 +194,8 @@ body {
     display: none;
     box-shadow: none;
     border: none;
-    max-width: 30%;
-    font-size: 14px;
+    max-width: calc(30% * var(--scale-factor));
+    font-size: calc(14px * var(--scale-factor));
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
@@ -260,9 +272,9 @@ body {
 
 #partsList {
     position: absolute;
-    bottom: 20px;
-    left: 20px;
-    max-height: 200px;
+    bottom: calc(var(--base-margin) * var(--scale-factor));
+    left: calc(var(--base-margin) * var(--scale-factor));
+    max-height: calc(200px * var(--scale-factor));
     overflow-y: auto;
     background: none;
     color: white;
@@ -271,6 +283,7 @@ body {
     z-index: 100;
     box-shadow: none;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    font-size: calc(14px * var(--scale-factor));
 }
 
 .part-item {
@@ -443,22 +456,22 @@ body {
 
 #stats {
     position: absolute;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
+    bottom: calc(var(--base-margin) * var(--scale-factor));
+    left: calc(var(--base-margin) * var(--scale-factor));
+    right: calc(var(--base-margin) * var(--scale-factor));
     background: none;
     color: white;
     padding: 0;
     border-radius: 0;
     z-index: 100;
     box-shadow: none;
-    font-size: 12px;
+    font-size: calc(12px * var(--scale-factor));
     text-align: center;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: calc(10px * var(--scale-factor));
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
@@ -468,16 +481,16 @@ body {
 
 #settingsGear {
     position: absolute;
-    top: 20px;
-    right: 80px;
+    top: calc(var(--base-margin) * var(--scale-factor));
+    right: calc(80px * var(--scale-factor));
     background: #3498db;
     color: white;
     border: none;
-    width: 40px;
-    height: 40px;
+    width: calc(40px * var(--scale-factor));
+    height: calc(40px * var(--scale-factor));
     border-radius: 50%;
     cursor: pointer;
-    font-size: 20px;
+    font-size: calc(20px * var(--scale-factor));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -506,11 +519,11 @@ body {
     
     /* Mobile status panel */
     #status {
-        top: 10px;
-        left: 10px;
-        right: 10px;
+        top: calc(var(--base-margin) * var(--scale-factor) * 0.5);
+        left: calc(var(--base-margin) * var(--scale-factor) * 0.5);
+        right: calc(var(--base-margin) * var(--scale-factor) * 0.5);
         padding: 0;
-        font-size: 14px;
+        font-size: calc(14px * var(--scale-factor));
         text-align: center;
         background: none;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
@@ -518,36 +531,36 @@ body {
     
     /* Mobile settings overlay */
     #settingsOverlay {
-        top: 60px;
-        left: 10px;
-        right: 10px;
+        top: calc(60px * var(--scale-factor));
+        left: calc(var(--base-margin) * var(--scale-factor) * 0.5);
+        right: calc(var(--base-margin) * var(--scale-factor) * 0.5);
         width: auto;
         padding: 0;
-        font-size: 12px;
+        font-size: calc(12px * var(--scale-factor));
         background: none;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
     }
     
     /* Mobile part info overlay */
     #partInfoOverlay {
-        top: 10px;
-        right: 10px;
-        left: 10px;
+        top: calc(var(--base-margin) * var(--scale-factor) * 0.5);
+        right: calc(var(--base-margin) * var(--scale-factor) * 0.5);
+        left: calc(var(--base-margin) * var(--scale-factor) * 0.5);
         padding: 0;
         max-height: 50vh;
         overflow-y: auto;
         max-width: none;
-        font-size: 12px;
+        font-size: calc(12px * var(--scale-factor));
         background: none;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
     }
     
     /* Mobile parts list */
     #partsList {
-        bottom: 10px;
-        left: 10px;
-        right: 10px;
-        max-height: 150px;
+        bottom: calc(var(--base-margin) * var(--scale-factor) * 0.5);
+        left: calc(var(--base-margin) * var(--scale-factor) * 0.5);
+        right: calc(var(--base-margin) * var(--scale-factor) * 0.5);
+        max-height: calc(150px * var(--scale-factor));
         padding: 0;
         background: none;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
@@ -555,46 +568,46 @@ body {
     
     /* Mobile stats */
     #stats {
-        bottom: 5px;
-        right: 5px;
-        left: 5px;
+        bottom: calc(5px * var(--scale-factor));
+        right: calc(5px * var(--scale-factor));
+        left: calc(5px * var(--scale-factor));
         padding: 0;
         text-align: center;
-        font-size: 11px;
+        font-size: calc(11px * var(--scale-factor));
         flex-direction: column;
-        gap: 2px;
+        gap: calc(2px * var(--scale-factor));
         background: none;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
     }
     
     /* Mobile settings gear */
     #settingsGear {
-        top: 10px;
-        right: 10px;
-        width: 35px;
-        height: 35px;
-        font-size: 18px;
+        top: calc(var(--base-margin) * var(--scale-factor) * 0.5);
+        right: calc(var(--base-margin) * var(--scale-factor) * 0.5);
+        width: calc(35px * var(--scale-factor));
+        height: calc(35px * var(--scale-factor));
+        font-size: calc(18px * var(--scale-factor));
     }
     
     /* Mobile buttons */
     .button-container {
-        gap: 8px;
+        gap: calc(8px * var(--scale-factor));
     }
     
     .button-row {
-        gap: 8px;
+        gap: calc(8px * var(--scale-factor));
     }
     
     .view-button-grid {
-        grid-template-columns: repeat(2, 35px);
-        gap: 5px;
+        grid-template-columns: repeat(2, calc(35px * var(--scale-factor)));
+        gap: calc(5px * var(--scale-factor));
     }
     
     #frontView, #topView, #backView, #isometricView {
-        width: 35px;
-        height: 35px;
-        font-size: 16px;
-        line-height: 35px;
+        width: calc(35px * var(--scale-factor));
+        height: calc(35px * var(--scale-factor));
+        font-size: calc(16px * var(--scale-factor));
+        line-height: calc(35px * var(--scale-factor));
     }
     
     #isolatePart, #showAllPartsBtn, #toggleGhostMode {
