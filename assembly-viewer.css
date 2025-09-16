@@ -510,6 +510,29 @@ body {
    MOBILE AND TABLET RESPONSIVE DESIGN
    =========================================== */
 
+/* Very small screens (phones) - ensure minimum usability */
+@media screen and (max-width: 480px) {
+    /* Phone-specific adjustments */
+    #partInfoOverlay {
+        max-width: calc(45% * var(--scale-factor)); /* Slightly wider on phones */
+        font-size: calc(12px * var(--scale-factor)); /* Smaller text to fit */
+    }
+    
+    #partsList {
+        max-width: calc(50% * var(--scale-factor)); /* Slightly wider on phones */
+        font-size: calc(12px * var(--scale-factor)); /* Smaller text to fit */
+    }
+    
+    #settingsOverlay {
+        max-width: calc(45% * var(--scale-factor)); /* Slightly wider on phones */
+        font-size: calc(12px * var(--scale-factor)); /* Smaller text to fit */
+    }
+    
+    #stats {
+        font-size: calc(11px * var(--scale-factor)); /* Smaller text to fit */
+    }
+}
+
 /* Mobile First Approach */
 @media screen and (max-width: 768px) {
     /* Adjust canvas container for mobile */
@@ -536,8 +559,9 @@ body {
     #settingsOverlay {
         top: calc(60px * var(--scale-factor));
         left: calc(var(--base-margin) * var(--scale-factor) * 0.5);
-        right: calc(var(--base-margin) * var(--scale-factor) * 0.5);
-        width: auto;
+        right: auto; /* Let it size naturally based on max-width */
+        width: calc(200px * var(--scale-factor)); /* Fixed width like desktop */
+        max-width: calc(35% * var(--scale-factor)); /* Maintain proportional width */
         padding: calc(8px * var(--scale-factor));
         font-size: calc(14px * var(--scale-factor));
         background: none;
@@ -549,11 +573,11 @@ body {
     #partInfoOverlay {
         top: calc(var(--base-margin) * var(--scale-factor) * 0.5);
         right: calc(var(--base-margin) * var(--scale-factor) * 0.5);
-        left: calc(var(--base-margin) * var(--scale-factor) * 0.5);
+        left: auto; /* Let it size naturally based on max-width */
         padding: calc(8px * var(--scale-factor));
         max-height: 50vh;
         overflow-y: auto;
-        max-width: none;
+        max-width: calc(30% * var(--scale-factor)); /* Maintain proportional width like desktop */
         font-size: calc(14px * var(--scale-factor));
         background: none;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
@@ -564,7 +588,8 @@ body {
     #partsList {
         bottom: calc(var(--base-margin) * var(--scale-factor) * 0.5);
         left: calc(var(--base-margin) * var(--scale-factor) * 0.5);
-        right: calc(var(--base-margin) * var(--scale-factor) * 0.5);
+        right: auto; /* Let it size naturally based on max-width */
+        max-width: calc(40% * var(--scale-factor)); /* Maintain proportional width */
         max-height: calc(150px * var(--scale-factor));
         padding: calc(5px * var(--scale-factor));
         background: none;
