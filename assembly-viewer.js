@@ -15,11 +15,20 @@ class ScreenScaler {
         this.scaleY = this.screenHeight / this.baseHeight;
         this.scaleDiagonal = this.screenDiagonal / this.baseDiagonal;
         
-        // Use the smallest scale to maintain proportions, but be more conservative
+        // Use the smallest scale to maintain proportions
         this.scale = Math.min(this.scaleX, this.scaleY, this.scaleDiagonal);
         
-        // Clamp scale between 0.7 and 1.5 for better model visibility
-        this.scale = Math.max(0.7, Math.min(1.5, this.scale));
+        // More aggressive scaling for mobile phones
+        if (this.screenWidth <= 480) {
+            // Mobile phones - scale more aggressively
+            this.scale = Math.max(1.2, Math.min(2.0, this.scale));
+        } else if (this.screenWidth <= 768) {
+            // Small tablets - moderate scaling
+            this.scale = Math.max(1.0, Math.min(1.8, this.scale));
+        } else {
+            // Desktop and large tablets - conservative scaling
+            this.scale = Math.max(0.7, Math.min(1.5, this.scale));
+        }
         
         console.log(`📱 Screen: ${this.screenWidth}x${this.screenHeight}, Scale: ${this.scale.toFixed(2)}`);
         
@@ -58,7 +67,18 @@ class ScreenScaler {
             this.scaleDiagonal = this.screenDiagonal / this.baseDiagonal;
             
             this.scale = Math.min(this.scaleX, this.scaleY, this.scaleDiagonal);
-            this.scale = Math.max(0.7, Math.min(1.5, this.scale));
+            
+            // More aggressive scaling for mobile phones
+            if (this.screenWidth <= 480) {
+                // Mobile phones - scale more aggressively
+                this.scale = Math.max(1.2, Math.min(2.0, this.scale));
+            } else if (this.screenWidth <= 768) {
+                // Small tablets - moderate scaling
+                this.scale = Math.max(1.0, Math.min(1.8, this.scale));
+            } else {
+                // Desktop and large tablets - conservative scaling
+                this.scale = Math.max(0.7, Math.min(1.5, this.scale));
+            }
             
             console.log(`📱 Resized: ${this.screenWidth}x${this.screenHeight}, Scale: ${this.scale.toFixed(2)}`);
             this.applyScaling();
@@ -174,7 +194,7 @@ scene.add(pointLight);
 const controls = new THREE.OrbitControls(activeCamera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.05;
-controls.screenSpacePanning = false;
+controls.screenSpacePanning = true; // Enable screen-space panning for proper vertical movement
 controls.minDistance = 1;
 controls.maxDistance = 500;
 
